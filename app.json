@@ -2,22 +2,29 @@
   "id": "8b6ad4b7-d5e8-4377-9f7f-0f145ee04e6d",
   "name": "Expense Transcation Match",
   "publisher": "github.com/expensemanagement",
-  "version": "25.0.1.0",
-  "brief": "",
+  "version": "24.0.1.0",
+  "brief": "Simplify the reconciliation of open transactions in Business Central",
   "description": "Helps to match open Expense entries with linked bank transactions",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
   "url": "",
-  "logo": "",
-  "dependencies": [],
+  "logo": "./res/logo.png",
+  "dependencies": [
+    {
+      "id": "8d4eab29-8c7f-4b6c-be9a-b7fdfb9da196",
+      "name": "Continia Expense Management",
+      "publisher": "Continia Software",
+      "version": "24.0.0.0"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "25.0.0.0",
+  "application": "24.0.0.0",
   "idRanges": [
     {
-      "from": 50100,
-      "to": 50149
+      "from": 63080,
+      "to": 63089
     }
   ],
   "resourceExposurePolicy": {
@@ -25,7 +32,8 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "14.0",
+  
+  "runtime": "13.0",
   "features": [
     "NoImplicitWith"
   ]
