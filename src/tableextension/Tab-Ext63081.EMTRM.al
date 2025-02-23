@@ -7,12 +7,6 @@ tableextension 63081 EMTRM extends "CEM Expense Match"
             Caption = 'Processed';
             DataClassification = CustomerContent;
         }
-        // field(63081; "GL Entry No."; Integer)
-        // {
-        //     Caption = 'GL Entry No.';
-        //     DataClassification = CustomerContent;
-        //     TableRelation = "G/L Entry";
-        // }
     }
     keys
     {

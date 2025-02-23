@@ -12,26 +12,4 @@ pageextension 63080 "EMADV GL Open Entries Ext" extends "General Ledger Entries"
             }
         }
     }
-    actions
-    {
-        addlast(processing)
-        {
-            group(ExpenseManagement)
-            {
-                Caption = 'Expense Management';
-
-                action(ExpenseEntry)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Update Expense Entries';
-                    Image = GetEntries;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    RunObject = Page "CEM Expense Card";
-                    ToolTip = 'Fill empty Expense entry no. if possible.';
-                }
-            }
-        }
-    }
 }

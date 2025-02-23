@@ -10,12 +10,6 @@ pageextension 63081 "EMTRM Expense Match Ext" extends "CEM Expense Match"
                 Caption = 'Processed';
                 ToolTip = 'Shows if the record has been processed.';
             }
-            // field("GL Entry No."; Rec."GL Entry No.")
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'GL Entry No.';
-            //     ToolTip = 'Shows the G/L Entry No. that this record is related to.';
-            // }
         }
     }
     actions

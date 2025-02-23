@@ -1,9 +1,11 @@
 codeunit 63080 "EMADV Transaction Match Mgt."
 {
+
+    Permissions = TableData 17 = rimd;
     procedure UpdateAccountsExpenseEntries() UpdatedEntries: Integer
     var
         ExpenseMatch: Record "CEM Expense Match";
-        ExpenseMatchModiy: Record "CEM Expense Match";
+        ExpenseMatchModify: Record "CEM Expense Match";
         Expense: Record "CEM Expense";
         BankTransaction: Record "CEM Bank Transaction";
     begin
@@ -18,9 +20,9 @@ codeunit 63080 "EMADV Transaction Match Mgt."
             if (Expense.Get(ExpenseMatch."Expense Entry No.") AND BankTransaction.Get(ExpenseMatch."Transaction Entry No.")) then begin
                 if UpdateGLEntry(Expense, BankTransaction) then begin
                     UpdatedEntries += 1;
-                    if ExpenseMatch.GetBySystemId(Expense.SystemId) then begin
-                        ExpenseMatch."Processed" := true;
-                        ExpenseMatch.Modify();
+                    if ExpenseMatchModify.GetBySystemId(ExpenseMatch.SystemId) then begin
+                        ExpenseMatchModify."Processed" := true;
+                        ExpenseMatchModify.Modify();
                     end;
                 end
             end;
@@ -32,6 +34,8 @@ codeunit 63080 "EMADV Transaction Match Mgt."
         GLEntry: Record "G/L Entry";
     begin
         GLEntry.SetCurrentKey("Document No.");
+
+        // Find and update GL entries linked to Expense Entry
         GLEntry.SetRange("Document No.", Expense."Created Doc. ID");
         if GLEntry.IsEmpty then
             exit;
@@ -42,6 +46,7 @@ codeunit 63080 "EMADV Transaction Match Mgt."
             GLEntry.Modify();
         until GLEntry.Next = 0;
 
+        // Find and update GL entries linked to Bank Transaction Entry
         GLEntry.SetRange("Document No.", BankTransaction."Posted Doc. ID");
         if GLEntry.IsEmpty then
             exit;
