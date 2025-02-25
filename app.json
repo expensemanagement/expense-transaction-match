@@ -2,7 +2,7 @@
   "id": "8b6ad4b7-d5e8-4377-9f7f-0f145ee04e6d",
   "name": "Expense Transcation Match",
   "publisher": "github.com/expensemanagement",
-  "version": "24.0.4.0",
+  "version": "24.0.5.0",
   "brief": "Simplify the reconciliation of open transactions in Business Central",
   "description": "Helps to match open Expense entries with linked bank transactions",
   "privacyStatement": "",
@@ -34,6 +34,11 @@
   },
   "runtime": "13.0",
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+  "supportedLocales": [
+    "en-US",
+    "de-DE"
   ]
 }

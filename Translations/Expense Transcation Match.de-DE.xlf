@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="de-DE" original="Expense Transcation Match.g.xlf">
+    <body>
+      <group id="body">
+        <trans-unit id="PageExtension 2547688156 - Action 167705457 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2247730318">
+          <source>Show Expense Entries matched with bank transactions.</source>
+          <target>Zeigt Belegposten an, welche mit einer Banktransaktion verknüpft sind.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Bank Transaction Ext - Action ExpenseTransactions - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2547688156 - Action 167705457 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2247730318">
+          <source>Show Matched Entries</source>
+          <target>Belegabstimmung anzeigen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Bank Transaction Ext - Action ExpenseTransactions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Action 2472856359 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Reset Processed Entries.</source>
+          <target>Verarbeitete Posten zurücksetzen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Action ResetProcessedEntries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Action 2472856359 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Reset Processed Entries</source>
+          <target>Verarbeitete Posten zurücksetzen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Action ResetProcessedEntries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Action 2492898984 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Update G/L Entries related to Expense Entries.</source>
+          <target>Aktualisiert Sachposten der Banktransaktion mit Ext. Belegnr. des Sachpostens der aus der Belegbuchung erzeugt wurde.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Action UpdateGLAccountWithExpenseEntryNo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Action 2492898984 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Update G/L Accounts </source>
+          <target>Sachposten aktualisieren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Action UpdateGLAccountWithExpenseEntryNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Control 3208180638 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Shows if the record has been processed.</source>
+          <target>Zeigt an, dass der Posten verarbeitet wurde.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Control Processed - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2987099507 - Control 3208180638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1699774204">
+          <source>Processed</source>
+          <target>Verarbeitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EMTRM Expense Match Ext - Control Processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 678322413 - Field 3208180638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1699774204">
+          <source>Processed</source>
+          <target>Verarbeitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension EMTRM - Field Processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3942285944 - Method 3276328387 - NamedType 3386397156" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 G/L Entries have been updated with the Ext. Document No. of the related Expense</source>
+          <target>%1 Sachposten wurden mit der Ext. Belegnummer des mit dem Beleg verknüpften Sachpostens aktualisiert.</target>
+          <note from="Developer" annotates="general" priority="2">Label for the updated transactions, %1 will be replaced with number of processed entries</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EMADV Transaction Match Mgt. - Method UpdateAccountsExpenseEntries - NamedType lblUpdatedTransactions</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

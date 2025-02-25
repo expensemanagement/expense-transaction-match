@@ -29,10 +29,8 @@ pageextension 63081 "EMTRM Expense Match Ext" extends "CEM Expense Match"
                 trigger OnAction()
                 var
                     TransactionMatchMgt: Codeunit "EMADV Transaction Match Mgt.";
-                    UpdatedLines: Integer;
                 begin
-                    UpdatedLines := TransactionMatchMgt.UpdateAccountsExpenseEntries();
-                    Message('%1 G/L Entries have been updated.', UpdatedLines);
+                    TransactionMatchMgt.UpdateAccountsExpenseEntries(true);
                 end;
             }
 
