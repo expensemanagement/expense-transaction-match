@@ -30,6 +30,7 @@ codeunit 63080 "EMADV Transaction Match Mgt."
             // Set loadfields
             Expense.SetLoadFields("Entry No.", "Created Doc. ID");
             BankTransaction.SetLoadFields("Entry No.", "Posted Doc. ID");
+            ExpenseMatchModify.SetLoadFields("Expense Entry No.", "Transaction Entry No.", Processed);
 
             // Iterate and process each entry
             ExpenseMatch.FindSet();
@@ -56,6 +57,7 @@ codeunit 63080 "EMADV Transaction Match Mgt."
         GLEntry: Record "G/L Entry";
         ExpenseExtDocNo: Code[35];
     begin
+        // Prepare GLEntry record
         GLEntry.SetLoadFields("Entry No.", "Document No.", "External Document No.");
         GLEntry.SetCurrentKey("Document No.");
 
