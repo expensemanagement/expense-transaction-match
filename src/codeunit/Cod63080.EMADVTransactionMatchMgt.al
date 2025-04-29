@@ -1,7 +1,7 @@
 codeunit 63080 "EMADV Transaction Match Mgt."
 {
 
-    Permissions = TableData 17 = rimd;
+    Permissions = TableData "G/L Entry" = M;
 
     trigger OnRun()
     begin
@@ -20,7 +20,7 @@ codeunit 63080 "EMADV Transaction Match Mgt."
         Expense: Record "CEM Expense";
         BankTransaction: Record "CEM Bank Transaction";
         UpdatedEntries: Integer;
-        lblUpdatedTransactions: Label '%1 G/L Entries have been updated with the Ext. Document No. of the related Expense', Locked = false, Comment = 'Label for the updated transactions, %1 will be replaced with number of processed entries';
+        lblUpdatedTransactions: Label '%1 G/L Entries that are linked to a matched Expense and Bank Transaction have been updated with the Bank Transaction Entry No.', Locked = false, Comment = 'Label for the updated transactions, %1 will be replaced with number of processed entries';
     begin
         // Filter non-processed entries in Expense Match table
         ExpenseMatch.SetCurrentKey("Processed");
@@ -59,26 +59,36 @@ codeunit 63080 "EMADV Transaction Match Mgt."
     begin
         // Prepare GLEntry record
         GLEntry.SetLoadFields("Entry No.", "Document No.", "External Document No.");
-        GLEntry.SetCurrentKey("Document No.");
+        GLEntry.SetCurrentKey("Document No.", "Posting Date");
 
         // Find and update GL entries linked to Expense Entry
         GLEntry.SetRange("Document No.", Expense."Created Doc. ID");
+        GLEntry.SetRange("Posting Date", Expense."Posting Date");
+        if Expense."Settlement No." <> '' then
+            // If there is a settlement number, we need to identify the G/L Entry by External Document No. (e.g. "EXPENSE 123")
+            GLEntry.SetRange("External Document No.", STRSUBSTNO('%1 %2', Expense.TABLECAPTION, Expense."Entry No."));
+
         if GLEntry.IsEmpty then
             exit;
 
-        if GLEntry.FindFirst() then
-            ExpenseExtDocNo := GLEntry."External Document No.";
+        if GLEntry.FindSet() then
+            repeat
+                GLEntry."Bank Transaction Entry No." := BankTransaction."Entry No.";
+                GLEntry.Modify(false);
+            until GLEntry.Next = 0;
 
         // Find and update GL entries linked to Bank Transaction Entry
         GLEntry.SetRange("Document No.", BankTransaction."Posted Doc. ID");
+        GLEntry.SetRange("Posting Date", BankTransaction."Posting Date");
+        GLEntry.SetRange("External Document No.");
         if GLEntry.IsEmpty then
             exit;
 
-        GLEntry.FindSet();
-        repeat
-            GLEntry."External Document No." := ExpenseExtDocNo;
-            GLEntry.Modify();
-        until GLEntry.Next = 0;
+        if GLEntry.FindSet() then
+            repeat
+                GLEntry."Bank Transaction Entry No." := BankTransaction."Entry No.";
+                GLEntry.Modify();
+            until GLEntry.Next = 0;
 
         exit(true)
     end;
@@ -86,12 +96,24 @@ codeunit 63080 "EMADV Transaction Match Mgt."
     procedure ResetProcessedEntries()
     var
         ExpenseMatch: Record "CEM Expense Match";
+        GLEntry: Record "G/L Entry";
     begin
         ExpenseMatch.SetCurrentKey("Processed");
         ExpenseMatch.SetRange("Processed", true);
         if ExpenseMatch.IsEmpty then
             exit;
 
+        if ExpenseMatch.FindSet() then
+            repeat
+                GLEntry.SetRange("Bank Transaction Entry No.", ExpenseMatch."Transaction Entry No.");
+                if not GLEntry.IsEmpty then
+                    GLEntry.ModifyAll("Bank Transaction Entry No.", 0);
+
+                ExpenseMatch."Processed" := false;
+                ExpenseMatch.Modify(false);
+            until ExpenseMatch.Next = 0;
+
+        // Finally, reset the processed status in the Expense Match table
         ExpenseMatch.ModifyAll(Processed, false);
     end;
 }

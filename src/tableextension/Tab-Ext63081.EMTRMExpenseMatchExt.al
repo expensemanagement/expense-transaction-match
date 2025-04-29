@@ -1,4 +1,4 @@
-tableextension 63081 EMTRM extends "CEM Expense Match"
+tableextension 63081 "EMTRM Expense Match Ext." extends "CEM Expense Match"
 {
     fields
     {
