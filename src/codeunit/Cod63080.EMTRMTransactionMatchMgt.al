@@ -1,4 +1,4 @@
-codeunit 63080 "EMADV Transaction Match Mgt."
+codeunit 63080 "EMTRM Transaction Match Mgt."
 {
 
     Permissions = TableData "G/L Entry" = M;
@@ -28,7 +28,7 @@ codeunit 63080 "EMADV Transaction Match Mgt."
         ExpenseMatch.SetRange("Processed", false);
         if not ExpenseMatch.IsEmpty then begin
             // Set loadfields
-            Expense.SetLoadFields("Entry No.", "Created Doc. ID");
+            Expense.SetLoadFields("Entry No.", "Created Doc. ID", Posted, "Settlement No.");
             BankTransaction.SetLoadFields("Entry No.", "Posted Doc. ID");
             ExpenseMatchModify.SetLoadFields("Expense Entry No.", "Transaction Entry No.", Processed);
 
@@ -37,13 +37,15 @@ codeunit 63080 "EMADV Transaction Match Mgt."
             repeat
                 // Get related expense and bank transaction entries and update G/L Entry
                 if (Expense.Get(ExpenseMatch."Expense Entry No.") AND BankTransaction.Get(ExpenseMatch."Transaction Entry No.")) then begin
-                    if UpdateGLEntry(Expense, BankTransaction) then begin
-                        UpdatedEntries += 1;
-                        if ExpenseMatchModify.GetBySystemId(ExpenseMatch.SystemId) then begin
-                            ExpenseMatchModify."Processed" := true;
-                            ExpenseMatchModify.Modify();
-                        end;
-                    end
+                    // Ensure the Expense is posted before updating G/L entries
+                    if Expense.Posted then
+                        if UpdateGLEntry(Expense, BankTransaction) then begin
+                            UpdatedEntries += 1;
+                            if ExpenseMatchModify.GetBySystemId(ExpenseMatch.SystemId) then begin
+                                ExpenseMatchModify."Processed" := true;
+                                ExpenseMatchModify.Modify();
+                            end;
+                        end
                 end;
             until ExpenseMatch.Next = 0;
         end;

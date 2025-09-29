@@ -28,7 +28,7 @@ pageextension 63081 "EMTRM Expense Match Ext" extends "CEM Expense Match"
 
                 trigger OnAction()
                 var
-                    TransactionMatchMgt: Codeunit "EMADV Transaction Match Mgt.";
+                    TransactionMatchMgt: Codeunit "EMTRM Transaction Match Mgt.";
                 begin
                     TransactionMatchMgt.UpdateAccountsExpenseEntries(true);
                 end;
@@ -43,7 +43,7 @@ pageextension 63081 "EMTRM Expense Match Ext" extends "CEM Expense Match"
 
                 trigger OnAction()
                 var
-                    TransactionMatchMgt: Codeunit "EMADV Transaction Match Mgt.";
+                    TransactionMatchMgt: Codeunit "EMTRM Transaction Match Mgt.";
                 begin
                     TransactionMatchMgt.ResetProcessedEntries();
                 end;
